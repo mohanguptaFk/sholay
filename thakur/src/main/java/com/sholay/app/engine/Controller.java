@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 
 import java.io.BufferedReader;
@@ -124,7 +125,12 @@ public class Controller {
     private static long getStartTime(ActivityTypes ac, String line1Split) throws ParseException {
         if ( line1Split  != null) {
             try {
-                return dateInMilis(line1Split);
+                line1Split = line1Split.replaceAll( "[^\\d/:]", " " );
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+                    Date date = sdf.parse(line1Split);
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTime(date);
+                    return calendar.getTimeInMillis();
             } catch (ParseException e) {
                 return System.currentTimeMillis();
             }

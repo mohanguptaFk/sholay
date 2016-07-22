@@ -28,12 +28,12 @@ public class ActivityStore {
     public void addActivity(Activity activity) throws ParseException {
         if (activity.equals(ActivityTypes.EATING)) {
             try {
-                Activity lunchAc = activity.setStartTime(dateInMilis(Controller.today + " 11:30:00"), Controller.oneHour);
-                Activity dinnerAc = activity.setStartTime(dateInMilis(Controller.today + " 19:30:00"), Controller.oneHour);
+                Activity lunchAc = activity.setTimes(dateInMilis(Controller.today + " 11:30:00"),dateInMilis(Controller.today + " 03:30:00"), Controller.twoHour);
+                Activity dinnerAc = activity.setTimes(dateInMilis(Controller.today + " 19:30:00"),dateInMilis(Controller.today + " 03:30:00"), Controller.twoHour);
                 this.allActivities.add(lunchAc);
                 this.allActivities.add(dinnerAc);
-                 lunchAc = activity.setStartTime(dateInMilis(Controller.tomorow + " 11:30:00"), Controller.oneHour);
-                 dinnerAc = activity.setStartTime(dateInMilis(Controller.tomorow + " 19:30:00"), Controller.oneHour);
+                 lunchAc = activity.setTimes(dateInMilis(Controller.tomorow + " 11:30:00"),dateInMilis(Controller.tomorow + " 03:30:00"), Controller.twoHour);
+                 dinnerAc = activity.setTimes(dateInMilis(Controller.tomorow + " 19:30:00"), dateInMilis(Controller.tomorow + " 03:30:00"),Controller.twoHour);
                 this.allActivities.add(lunchAc);
                 this.allActivities.add(dinnerAc);
             } catch (ParseException e) {
