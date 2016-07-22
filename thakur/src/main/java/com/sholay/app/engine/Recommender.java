@@ -69,6 +69,10 @@ public class Recommender {
                 for (int i =1; i < clauses.size(); i++) {
                     ors.retainAll(clauses.get(i));
                 }
+                // no use looking with null.
+                if (ors.isEmpty()) {
+                    ors.addAll(clauses.get(0));
+                }
                 set = ActivityStore.getInstance().getORs(ors);
             }
 
