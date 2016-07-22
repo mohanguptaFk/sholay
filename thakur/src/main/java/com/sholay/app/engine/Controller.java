@@ -87,6 +87,7 @@ public class Controller {
 
                         try {
                             ActivityStore.getInstance().addActivity(activity);
+                            Tagger.getInstance().tag(activity);
                         } catch (ParseException e) {
 
                         }
