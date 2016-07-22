@@ -35,8 +35,9 @@ public class OutputActivity {
         if (activity != null) {
             id = activity.id;
             title = activity.title;
-            imageUrl = activity.imageUrl;
+            imageUrl = activity.image;
             description = activity.getDescription();
+            type = activity.ac;
         }
     }
 }

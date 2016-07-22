@@ -71,6 +71,10 @@ public class ActivityStore {
 
     }
 
+    public Set<Activity> getAllActivities() {
+        return allActivities;
+    }
+
     private void addActivityToTag(String tag, Activity activity) {
         if (!tagToActivityMap.containsKey(tag)) {
             tagToActivityMap.put(tag.toLowerCase(), new HashSet<Activity>());

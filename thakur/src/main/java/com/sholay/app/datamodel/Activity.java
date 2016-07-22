@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public class Activity implements ITaggable {
     private int count;
-    private ActivityTypes ac;
+    public ActivityTypes ac;
     public String id; //unique id for the activity.
     public ActivityTypes type;
 
@@ -26,7 +26,7 @@ public class Activity implements ITaggable {
 
     public String address;
     private String imageP;
-    private String image;
+    public String image;
     private String eventlink;
 
     public String imagePath; //local disk path
@@ -36,6 +36,10 @@ public class Activity implements ITaggable {
     //price range.
     public long budgetMin;
     public long budgetMax;
+
+    private Map<String, Double> keywords = new HashMap<String, Double>();
+
+    public Map<String, Double> tags = new HashMap<String, Double>(); //with confidence
 
 
     public Activity(Activity activity, long startTime, long duration) {
@@ -98,9 +102,6 @@ public class Activity implements ITaggable {
                 '}';
     }
 
-    private Map<String, Double> keywords;
-
-    public Map<String, Double> tags; //with confidence
 
 
     public Activity() {
@@ -108,7 +109,7 @@ public class Activity implements ITaggable {
         keywords = new HashMap<String, Double>();
     }
 
-    public Activity(int count, ActivityTypes ac, String title, long starttime, long endtime, long duration, String lat, String lang, String address, String imageP, String image, String eventlink, List<String> tags) {
+    public Activity(int count, ActivityTypes ac, String title, long starttime, long endtime, long duration, String lat, String lang, String address, String imageP, String image, String eventlink, List<String> keywords) {
 
         this.count = count;
         this.ac = ac;
@@ -122,9 +123,9 @@ public class Activity implements ITaggable {
         this.imageP = imageP;
         this.image = image;
         this.eventlink = eventlink;
-        this.tags = new HashMap<String, Double>();
-        for (String tag : tags) {
-            this.tags.put(tag, 100.0d);
+        this.keywords = new HashMap<String, Double>();
+        for (String keyword : keywords) {
+            this.keywords.put(keyword, 100.0d);
         }
     }
 

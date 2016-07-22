@@ -28,25 +28,25 @@ public class Recommender {
         if (filterSuperTags == null) filterSuperTags = new HashSet<SuperTags.SuperTagsTypes>();
         filterSuperTags.add(SuperTags.SuperTagsTypes.PRIMARY);
 
-        bestPrimaryActivity = ActivityStore.getInstance().getAllActivities().iterator().next();
-        List<OutputActivity> list = new ArrayList<OutputActivity>();
-        list.add(new OutputActivity(bestPrimaryActivity));
-
-//        // create the matching set.
-//        getMatchingSet(filterSuperTags);
-//
-//        // get the best ranking event based on user tags.
-//        getBestPrimaryEvent();
-//
-//
-//
-//        // stick non-primary events.
-//        getNonPrimaryEvents();
-//
+//        bestPrimaryActivity = ActivityStore.getInstance().getAllActivities().iterator().next();
 //        List<OutputActivity> list = new ArrayList<OutputActivity>();
-//        list.add(new OutputActivity(bestBefore));
 //        list.add(new OutputActivity(bestPrimaryActivity));
-//        list.add(new OutputActivity(bestAfter));
+
+        // create the matching set.
+        getMatchingSet(filterSuperTags);
+
+        // get the best ranking event based on user tags.
+        getBestPrimaryEvent();
+
+
+
+        // stick non-primary events.
+        getNonPrimaryEvents();
+
+        List<OutputActivity> list = new ArrayList<OutputActivity>();
+        list.add(new OutputActivity(bestBefore));
+        list.add(new OutputActivity(bestPrimaryActivity));
+        list.add(new OutputActivity(bestAfter));
 
         return list;
     }
@@ -83,7 +83,7 @@ public class Recommender {
                 }
             }
 
-            macthingSet = timeFiltered;
+             macthingSet = timeFiltered;
 
             //macthingSet = ActivityStore.getInstance().getANDsOfORs(clauses);
         }
@@ -172,15 +172,33 @@ public class Recommender {
             for (ScoredActivity sa: sorted) {
                 Activity a = sa.activity;
                 // we do not already have an event and this event starts after our time and ends before our window.
-                if (beforePrimary == null && (
-                        beforeActivityStart <= a.startTime && a.endTime <= beforeActivityEnd)) {
-                    beforePrimary = a;
+                if (a.type != ActivityTypes.MOVIE) {
+                    long duration = a.endTime - beforeActivityStart;
+                    if (beforePrimary == null && (
+                            duration >= 30*60*1000)) {
+                        beforePrimary = a;
+                    }
+
+                    duration = a.endTime - afterActivityStart;
+                    if (afterPrimary == null && (
+                            duration >= 30*60*1000)) {
+                        afterPrimary = a;
+                    }
+
+                }
+                else {
+                    if (beforePrimary == null && (
+                            beforeActivityStart <= a.startTime && a.endTime <= beforeActivityEnd)) {
+                        beforePrimary = a;
+                    }
+
+                    if (afterPrimary == null && (
+                            afterActivityStart <= a.startTime && a.endTime  <= afterActivityEnd)) {
+                        afterPrimary = a;
+                    }
+
                 }
 
-                if (afterPrimary == null && (
-                        afterActivityStart <= a.startTime && a.endTime  <= afterActivityEnd)) {
-                    afterPrimary = a;
-                }
 
                 if (beforePrimary != null && afterPrimary != null) {
                     break;
