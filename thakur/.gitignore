@@ -1,0 +1,14 @@
+/target/
+*.iml
+*.ipr
+*.iws
+.idea
+*.swp
+.project
+.svn
+/logs/
+.DS_Store
+/data/
+.classpath
+.settings/
+overlays/
