@@ -44,9 +44,9 @@ public class Recommender {
         getNonPrimaryEvents();
 
         List<OutputActivity> list = new ArrayList<OutputActivity>();
-        list.add(new OutputActivity(bestBefore));
-        list.add(new OutputActivity(bestPrimaryActivity));
-        list.add(new OutputActivity(bestAfter));
+        list.add(new OutputActivity(bestBefore, userInfo));
+        list.add(new OutputActivity(bestPrimaryActivity, userInfo));
+        list.add(new OutputActivity(bestAfter, userInfo));
 
         return list;
     }
@@ -136,7 +136,10 @@ public class Recommender {
             bestActivity = set.iterator().hasNext()? set.iterator().next() : null;
         }
 
+
         bestPrimaryActivity = bestActivity;
+
+
     }
 
     public void getNonPrimaryEvents() {

@@ -1,5 +1,6 @@
 package com.sholay.app.datamodel;
 
+import com.sholay.app.Utils;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
@@ -24,20 +25,21 @@ public class OutputActivity {
     public String imageUrl; //actual web url.
 
     @JsonProperty
-    public long distanceInMeters; //first activity has distance from source, others distance from previous.
+    public double distanceInMeters; //first activity has distance from source, others distance from previous.
 
     @JsonProperty
     public String description;
 
     public OutputActivity(){}
 
-    public OutputActivity(Activity activity) {
+    public OutputActivity(Activity activity, UserInfo userInfo) {
         if (activity != null) {
             id = activity.id;
             title = activity.title;
             imageUrl = activity.image;
             description = activity.getDescription();
             type = activity.ac;
+            //distanceInMeters = Utils.distance(Utils.tryParseDouble(userInfo.lat), Utils.tryParseDouble(userInfo.lng), Utils.tryParseDouble(activity.lat), Utils.tryParseDouble(activity.lng),0,0);
         }
     }
 }

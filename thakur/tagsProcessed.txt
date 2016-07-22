@@ -1,0 +1,49 @@
+Thai:::thai, tom yam, pad Thai, massaman curry, green curry, red curry:::P,S,T:::I:::P:::FM,S,C,F
+Mexican:::mexican, burritos, tacos, nachos:::P,S,T:::I:::P:::FM,S,C,F
+Indian:::indian,parantha, poori:::P,S,T:::I:::P:::FM,S,C,F
+Punjabi:::punjabi, chole bhature:::P,S,T:::I:::P:::FM,S,C,F
+South Indian:::south indian, idli, dosa, utapam:::P,S,T:::I:::P:::FM,S,C,F
+Bengali:::bengali, fish:::P,S,T:::I:::P:::FM,S,C,F
+Chinese:::chinese, hakka, noodles:::P,S,T:::I:::P:::FM,S,C,F
+Continental:::continental, pasta :::P,S,T:::I:::P:::FM,S,C,F
+Fastfood:::fastfood, pizza, burger:::P,S,T:::I:::P:::FM,S,C,F
+Romantic:::romantic, candlelight, rooftop, ambience, pool side:::P,S,T:::I:::P:::C
+Luxury:::luxury, high end, sophisticated, fine dining:::P,S,T:::I:::P:::FM,C
+Pubs:::pubs, microbrewery, bars, alocohol, drinks, cocktail:::P,S,T:::I:::P:::S,C,F
+Coffee:::coffee, tea, chai:::S,T:::I:::P:::S,C,F
+Desserts:::desserts, ice cream, frozen delights, frozen yoghurt:::S,T:::I:::P:::FM,S,C,F
+Sports:::cricket, football, kabaddi, badminton, running, cycling:::P:::O,I:::A:::FM,S,C,F
+Cricket:::cricket, ipl, one day, mumbai indians, delhi daredevils, royal challengers, rajasthan royals, sunrisers hyderabad, kolkata knight riders, kings xi punjab:::P:::O,I:::A:::FM,S,C,F
+Football:::football, bengaluru fc, goa, soccer:::P:::O,I:::A:::FM,S,C,F
+Badminton:::badminton:::P:::I:::A:::FM,S,C,F
+Running:::running, race, marathon:::P:::O,I:::A:::S,C,F
+Cycling:::cycling, biking, bike:::P:::O,I:::A:::FM,S,C,F
+Yoga:::yoga, excercise:::P:::I:::A:::S,C
+Tennis:::tennis:::P:::O,I:::A:::FM,S,C,F
+Photography:::photography, shutterbug, photo, pictures, pics, shoot, capture:::P:::O:::A:::S,F
+Dance:::dancing, kathak, samba, salsa:::P:::I:::A:::S,C,F
+Cooking:::cooking, baking, cakes, bread, cookery:::P:::I:::A:::S,F
+Painting:::painting, art, painter:::P:::I:::A:::S,F
+Books:::book, author, reading:::P:::I:::P:::FM,S,C,F
+Plays:::plays, theatre, actors:::P:::I:::P:::FM,S,C,F
+nightlife:::nightlife, disc, discotheque, pub, bar party:::P:::I:::A:::S,C,F
+Concerts:::music, musician, bands, singer, artist:::P:::I:::A:::FM,S,C,F
+Picnic:::picnic:::P:::O:::A:::FM,S,C,F
+Trek:::trek, hiking:::P:::O:::A:::FM,S,C,F
+nature:::nature, parks, lake, birds, sunrise, sunset, forest, river, waterfall, wildlife, zoo:::P:::O:::A:::FM,S,C,F
+monuments:::monuments, aquarium, museum, fort, palace, building:::P:::O:::A:::FM,S,C,F
+pets:::pets, pet farm, zoo:::P:::O:::A:::FM,S,C,F
+family:::festival, puppet, clown, kite:::P:::O:::A:::FM,S,C,F
+spa:::spa, massage, pedicure, manicure:::P,S,T:::I:::P:::S
+technical::::::P:::I:::A:::S
+startups::::::P:::I:::A:::S
+Public speaking::::::P:::I:::A:::S
+movies-hindi-action:::movie, hindi, action:::P,S:::I:::P:::FM,S,C,F
+movies-hindi-comedy:::movie, hindi, comedy:::P,S:::I:::P:::FM,S,C,F
+movies-hindi-thriller:::movie, hindi, thriller:::P,S:::I:::P:::FM,S,C,F
+movies-hindi-romance:::movie, hindi, romance:::P,S:::I:::P:::FM,S,C,F
+movies-english-action:::movie, english, action:::P,S:::I:::P:::FM,S,C,F
+movies-english-comedy:::movie, english, comedy:::P,S:::I:::P:::FM,S,C,F
+movies-english-thriller:::movie, english, thriller:::P,S:::I:::P:::FM,S,C,F
+movies-english-romance:::movie, english, romance:::P,S:::I:::P:::FM,S,C,F
+movies-english-animation:::movie, english, animation:::P,S:::I:::P:::FM,S,C,F

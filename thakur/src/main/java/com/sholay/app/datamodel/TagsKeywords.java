@@ -81,7 +81,7 @@ public class TagsKeywords {
     }
 
     public  void init() {
-        String filePath= "//Users/mohan.gupta/flipkart/work/sholey/tagsProcessed.txt";
+        String filePath= "tagsProcessed.txt";
         String SEPERATOR =":::";
         List<String> lines = Utils.readAllLines(filePath);
 
