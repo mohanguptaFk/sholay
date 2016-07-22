@@ -15,14 +15,60 @@ public class Activity implements ITaggable {
     public ActivityTypes type;
 
     public String title; //user visible
-    private  String starttime;
-    private String endtime;
     public long startTime;
     public long endTime;
     public long duration; //duration 0 means its kinda a place which is open between start and end time
 
     public String lat;
     private String lang;
+
+    public String lng;
+
+    public String address;
+    private String imageP;
+    private String image;
+    private String eventlink;
+
+    public String imagePath; //local disk path
+    public String imageUrl; //actual web url.
+    public String eventLink; //external link.
+
+    //price range.
+    public long budgetMin;
+    public long budgetMax;
+
+
+    public Activity(Activity activity, long startTime, long duration) {
+        Activity newActivity = new Activity(activity);
+        newActivity.startTime = startTime;
+        newActivity.duration = duration;
+    }
+
+    public Activity(Activity activity) {
+        this.ac = activity.ac;
+        this.id = activity.id;
+        this.type = activity.type;
+        this.title = activity.title;
+        this.startTime = activity.startTime;
+        this.endTime = activity.endTime;
+        this.duration = activity.duration;
+        this.lang = activity.lang;
+        this.lat = activity.lat;
+        this.address = activity.address;
+        this.image = activity.image;
+        this.imageP = activity.imageP;
+        this.imagePath = activity.imagePath;
+        this.imageUrl = activity.imageUrl;
+
+
+    }
+
+    public Activity(Activity activity, long startTime, long endTime, long duration) {
+        Activity newActivity = new Activity(activity);
+        newActivity.startTime = startTime;
+        newActivity.duration = duration;
+        newActivity.endTime = endTime;
+    }
 
     @Override
     public String toString() {
@@ -32,8 +78,6 @@ public class Activity implements ITaggable {
                 ", id='" + id + '\'' +
                 ", type=" + type +
                 ", title='" + title + '\'' +
-                ", starttime='" + starttime + '\'' +
-                ", endtime='" + endtime + '\'' +
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
                 ", duration='" + duration + '\'' +
@@ -54,22 +98,6 @@ public class Activity implements ITaggable {
                 '}';
     }
 
-    public String lng;
-
-    public String address;
-    private String imageP;
-    private String image;
-    private String eventlink;
-
-    public String imagePath; //local disk path
-    public String imageUrl; //actual web url.
-    public String eventLink; //external link.
-
-    //price range.
-    public long budgetMin;
-    public long budgetMax;
-
-
     private Map<String, Double> keywords;
 
     public Map<String, Double> tags; //with confidence
@@ -79,14 +107,13 @@ public class Activity implements ITaggable {
         keywords = new HashMap<String, Double>();
     }
 
-    public Activity(int count, ActivityTypes ac, String title, String starttime, String endtime, long duration, String lat, String lang, String address, String imageP, String image, String eventlink, List<String> tags) {
-
+    public Activity(int count, ActivityTypes ac, String title, long starttime, long endtime, long duration, String lat, String lang, String address, String imageP, String image, String eventlink, List<String> tags) {
 
         this.count = count;
         this.ac = ac;
         this.title = title;
-        this.starttime = starttime;
-        this.endtime = endtime;
+        this.startTime = starttime;
+        this.endTime = endtime;
         this.duration = duration;
         this.lat = lat;
         this.lang = lang;
@@ -110,5 +137,13 @@ public class Activity implements ITaggable {
 
     public Map<String, Double> getTags() {
         return tags;
+    }
+
+    public Activity setStartTime(long s, long duration) {
+        return new Activity(this, s, duration);
+    }
+
+    public Activity setTimes(long startTime, long endTime, long duration) {
+        return new Activity(this, startTime, endTime, duration);
     }
 }
