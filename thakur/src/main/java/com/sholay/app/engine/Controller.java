@@ -19,15 +19,25 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.*;
+
+import static com.sholay.app.datamodel.ActivityStore.dateInMilis;
 
 /**
  * Created by mohan.gupta on 22/07/16.
  */
 public class Controller {
 
+    public static String today = "22-07-2016";
+    public static String tomorow = "23-07-2016";
+
+    public static  long oneHour = 60*60*1000;
+
     private static final Logger LOG = LoggerFactory.getLogger(Controller.class);
     private static ObjectMapper objectMapper = new ObjectMapper();
+    public static long twoHour = 2 * oneHour;
+
     public static void init() {
         TagsKeywords.getInstance().init();
         initActivities();
@@ -48,14 +58,19 @@ public class Controller {
                     String[] line1Splits = line1.split("\t");
                     if (line1Splits.length > 5) {
                         String title ;
+                        String type = line1Splits[5];
+                        ActivityTypes ac = getActivityType(type);
                         Map<String,String> info = new HashMap<String, String>();
                         title = line1Splits[0];
                         String image = line1Splits[1];
                         List<String> tags = getTags(line1Splits[2]);
                         String location = line1Splits[3];
-                        String time = getTime(line1Splits[4]);
-                        String type = line1Splits[5];
-                        ActivityTypes ac = getActivityType (type);
+                        long time;
+                        try {
+                            time = getStartTime(ac, line1Splits[4]);
+                        } catch (ParseException e) {
+                            time = System.currentTimeMillis();
+                        }
                         if (line1Splits.length > 6) {
                             String formattedLine = line1Splits[6].replaceAll("'", "\"");
                             info = objectMapper.readValue(formattedLine, Map.class);
@@ -67,11 +82,15 @@ public class Controller {
                         String lat = getLat(location);
                         String lang = getLang(location);
                         long duration = getduration(ac, info);
-                        String endtime = null;
-                        String starttime = null;
+                        long endtime = System.currentTimeMillis();
                         Activity activity = new Activity(count, ac, title, time, endtime, duration, lat, lang, address, imageP, image, eventlink, tags);
 
-                        ActivityStore.getInstance().addActivity(activity);
+                        try {
+                            ActivityStore.getInstance().addActivity(activity);
+                            Tagger.getInstance().tag(activity);
+                        } catch (ParseException e) {
+
+                        }
                     }
                 } else {
                     break;
@@ -96,14 +115,26 @@ public class Controller {
                 return (long) (1.5 * 60 * 60 * 1000); // 1.5hours;
             }
              else {
-                return 1 * 60 * 60 * 1000;
+                return 60 * 60 * 1000;
             }
         }
-        return 1 * 60 * 60 * 1000;
+        return 60 * 60 * 1000;
     }
 
-    private static String getTime(String line1Split) {
-        return line1Split;
+    private static long getStartTime(ActivityTypes ac, String line1Split) throws ParseException {
+        if ( line1Split  != null) {
+            try {
+                return dateInMilis(line1Split);
+            } catch (ParseException e) {
+                return System.currentTimeMillis();
+            }
+        } else {
+            if (ac.equals(ActivityTypes.PLACE)) {
+                return dateInMilis(today + " 10:00:00");
+            }
+        }
+
+        return System.currentTimeMillis();
     }
 
     private static List<String> getTags(String line) {
@@ -112,14 +143,18 @@ public class Controller {
         if (line.contains("[")) {
             line = line.replace("[","");
             line = line.replace("]","");
-            splits = line.split(",");
+            line = line.replace("\"","");
+            splits = line.trim().split(",");
         } else if (line.contains(",")) {
             splits = line.split(",");
         } else {
             list.add(line) ;
             return list;
         }
-        return Arrays.asList(splits);
+        for (String s : splits) {
+            list.add(s.trim().toLowerCase());
+        }
+        return list;
     }
 
     private static String getdaddr(String location) {
@@ -170,7 +205,7 @@ public class Controller {
     public static void main(String[] args) {
         initActivities();
         ActivityStore.getInstance().buildIndex();
-        //System.out.println(ActivityStore.getInstance().getActivity("chai").toString());
+        System.out.println(ActivityStore.getInstance().getActivity("indian").toString());
     }
 
     //input all the user level params and the output is json.

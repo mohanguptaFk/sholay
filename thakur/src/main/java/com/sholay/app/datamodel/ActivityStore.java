@@ -1,5 +1,6 @@
 package com.sholay.app.datamodel;
 
+import com.sholay.app.engine.Controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,28 +25,36 @@ public class ActivityStore {
         return instance;
     }
 
-    public Set<Activity> getAllActivities() {
-        return allActivities;
+    public void addActivity(Activity activity) throws ParseException {
+        if (activity.equals(ActivityTypes.EATING)) {
+            try {
+                Activity lunchAc = activity.setStartTime(dateInMilis(Controller.today + " 11:30:00"), Controller.oneHour);
+                Activity dinnerAc = activity.setStartTime(dateInMilis(Controller.today + " 19:30:00"), Controller.oneHour);
+                this.allActivities.add(lunchAc);
+                this.allActivities.add(dinnerAc);
+                 lunchAc = activity.setStartTime(dateInMilis(Controller.tomorow + " 11:30:00"), Controller.oneHour);
+                 dinnerAc = activity.setStartTime(dateInMilis(Controller.tomorow + " 19:30:00"), Controller.oneHour);
+                this.allActivities.add(lunchAc);
+                this.allActivities.add(dinnerAc);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+        } else if (activity.equals(ActivityTypes.PLACE)) {
+            Activity lunchAc = activity.setTimes(dateInMilis(Controller.today + " 09:30:00"),dateInMilis(Controller.today + " 05:30:00"), Controller.twoHour);
+            this.allActivities.add(lunchAc);
+            lunchAc = activity.setTimes(dateInMilis(Controller.tomorow + " 09:30:00"), dateInMilis(Controller.tomorow + " 05:30:00"), Controller.twoHour);
+            this.allActivities.add(lunchAc);
+
+        } else {
+            this.allActivities.add(activity);
+        }
     }
 
-    public void addActivity(Activity activity) {
-//        if (activity.equals(ActivityTypes.EATING)) {
-////            newAc = activity.setStartTime();
-//            tagToActivityMap.put("lunch", )
 
-//        }
-    { this.allActivities.add(activity);}
-    }
-
-
-    private long dateInMilis() throws ParseException {
+    public static long dateInMilis(String day) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
-        String dateInString = "22-01-2015 10:20:56";
-        Date date = sdf.parse(dateInString);
-
-        System.out.println(dateInString);
-        System.out.println("Date - Time in milliseconds : " + date.getTime());
-
+        Date date = sdf.parse(day);
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         return calendar.getTimeInMillis();

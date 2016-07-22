@@ -10,13 +10,13 @@ import java.util.Set;
  * Created by mohan.gupta on 22/07/16.
  */
 public class Tagger {
-    private Tagger instance = new Tagger();
+    private static Tagger instance = new Tagger();
 
     private Tagger() {
 
     }
 
-    public Tagger getInstance() {
+    public static Tagger getInstance() {
         return instance;
     }
 
