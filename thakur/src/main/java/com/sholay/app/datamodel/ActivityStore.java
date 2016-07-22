@@ -82,4 +82,40 @@ public class ActivityStore {
     public Set<Activity> getActivity(String tag) {
         return tagToActivityMap.get(tag.toLowerCase());
     }
+
+    //ex (play OR food) AND (outdoor)
+    public Set<Activity> getANDsOfORs(List<Set<String>> andTagClauses) {
+        List<Set<Activity>> sets = new ArrayList<Set<Activity>>();
+        Map<Activity, Integer> activityCount = new HashMap<Activity, Integer>();
+        Set<Activity> finalOutput = new HashSet<Activity>();
+
+        for (Set<String> tags : andTagClauses) {
+            Set<Activity> ors = getORs(tags);
+            for (Activity activity : ors) {
+                if (!activityCount.containsKey(activity)) {
+                    activityCount.put(activity, 0);
+                }
+                activityCount.put(activity, activityCount.get(activity) + 1);
+            }
+        }
+
+
+        for (Activity activity : activityCount.keySet()) {
+            if (activityCount.get(activity) == andTagClauses.size()) {
+                finalOutput.add(activity);
+            }
+        }
+
+        return finalOutput;
+    }
+
+    public Set<Activity> getORs(Set<String> tags) {
+        Set<Activity> finalOutput = new HashSet<Activity>();
+
+        for (String tag : tags) {
+            finalOutput.addAll(tagToActivityMap.get(tag));
+        }
+
+        return finalOutput;
+    }
 }

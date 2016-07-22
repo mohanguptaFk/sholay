@@ -102,6 +102,7 @@ public class Activity implements ITaggable {
 
     public Map<String, Double> tags; //with confidence
 
+
     public Activity() {
         tags = new HashMap<String, Double>();
         keywords = new HashMap<String, Double>();
@@ -139,6 +140,9 @@ public class Activity implements ITaggable {
         return tags;
     }
 
+    public String getDescription() {
+        return "";
+    }
     public Activity setStartTime(long s, long duration) {
         return new Activity(this, s, duration);
     }
