@@ -104,7 +104,9 @@ public class ActivityStore {
         Set<Activity> finalOutput = new HashSet<Activity>();
 
         for (String tag : tags) {
-            finalOutput.addAll(tagToActivityMap.get(tag));
+            if (tagToActivityMap.containsKey(tag)) {
+                finalOutput.addAll(tagToActivityMap.get(tag));
+            }
         }
 
         return finalOutput;

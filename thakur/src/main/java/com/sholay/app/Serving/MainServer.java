@@ -41,7 +41,7 @@ public class MainServer extends HttpServlet {
             String inout= req.getParameter("inout");
             String chillAdvent= req.getParameter("chillAdvent");
             String familyElse = req.getParameter("familyElse");
-            String[] keywords = req.getParameterValues("keywords");
+            String[] keywords = req.getParameterValues("keywords[]");
 
             if (Utils.tryParseLong(startTime) != null && Utils.tryParseLong(endTime) != null) {
                 output = Controller.getEventsResponse(Utils.tryParseLong(startTime),

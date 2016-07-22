@@ -19,7 +19,7 @@ public class Recommender {
 
     public Recommender(UserInfo userInfo) {
         this.userInfo = userInfo;
-        this.userInfo.startTime = userInfo.startTime + (long)1.5*60*60; //traffic
+        this.userInfo.startTime = userInfo.startTime + (long)1.5*60*60*1000; //traffic
     }
     public List<OutputActivity> recommend() {
 
@@ -28,22 +28,25 @@ public class Recommender {
         if (filterSuperTags == null) filterSuperTags = new HashSet<SuperTags.SuperTagsTypes>();
         filterSuperTags.add(SuperTags.SuperTagsTypes.PRIMARY);
 
-        // create the matching set.
-        getMatchingSet(filterSuperTags);
-
-        // get the best ranking event based on user tags.
-        getBestPrimaryEvent();
-
-        //List<OutputActivity> list = new ArrayList<OutputActivity>();
-        //list.add(new OutputActivity(bestPrimaryActivity));
-
-        // stick non-primary events.
-        getNonPrimaryEvents();
-
+        bestPrimaryActivity = ActivityStore.getInstance().getAllActivities().iterator().next();
         List<OutputActivity> list = new ArrayList<OutputActivity>();
-        list.add(new OutputActivity(bestBefore));
         list.add(new OutputActivity(bestPrimaryActivity));
-        list.add(new OutputActivity(bestAfter));
+
+//        // create the matching set.
+//        getMatchingSet(filterSuperTags);
+//
+//        // get the best ranking event based on user tags.
+//        getBestPrimaryEvent();
+//
+//
+//
+//        // stick non-primary events.
+//        getNonPrimaryEvents();
+//
+//        List<OutputActivity> list = new ArrayList<OutputActivity>();
+//        list.add(new OutputActivity(bestBefore));
+//        list.add(new OutputActivity(bestPrimaryActivity));
+//        list.add(new OutputActivity(bestAfter));
 
         return list;
     }
@@ -137,13 +140,13 @@ public class Recommender {
     }
 
     public void getNonPrimaryEvents() {
-        long trafficDelta = 30*60; //sec
+        long trafficDelta = 30*60*1000; //sec
         if (bestPrimaryActivity != null) {
-            long beforeActivityStart = userInfo.startTime -30*60;
+            long beforeActivityStart = userInfo.startTime -trafficDelta;
             long beforeActivityEnd = bestPrimaryActivity.startTime - trafficDelta;
 
             long afterActivityStart = bestPrimaryActivity.endTime +trafficDelta;
-            long afterActivityEnd = userInfo.endTime +30*60;
+            long afterActivityEnd = userInfo.endTime +trafficDelta;
 
             //get all non-primary activities sorted by user affinity.
             Set<String> tags = new HashSet<String>();

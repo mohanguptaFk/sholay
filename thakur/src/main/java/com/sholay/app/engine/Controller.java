@@ -31,6 +31,7 @@ public class Controller {
     public static void init() {
         TagsKeywords.getInstance().init();
         initActivities();
+        ActivityStore.getInstance().buildIndex();
         //read all the events.
         // get the tagging done on each of those events.
         // and build activity store.
