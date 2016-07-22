@@ -49,6 +49,18 @@ public class UserInfo implements ITaggable{
         }
     }
 
+    public Map<String, Double> getTagsConf() {
+        return tagsConf;
+    }
+
+    public String getLat() {
+        return lat;
+    }
+
+    public String getLng() {
+        return lng;
+    }
+
     public void addSuperTag(SuperTags.SuperTagsTypes type) {
         superTags.add(type);
     }

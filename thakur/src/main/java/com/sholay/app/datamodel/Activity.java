@@ -33,6 +33,7 @@ public class Activity implements ITaggable {
 
     public Map<String, Double> tags; //with confidence
 
+
     public Activity() {
         tags = new HashMap<String, Double>();
         keywords = new HashMap<String, Double>();
@@ -48,5 +49,9 @@ public class Activity implements ITaggable {
 
     public Map<String, Double> getTags() {
         return tags;
+    }
+
+    public String getDescription() {
+        return "";
     }
 }

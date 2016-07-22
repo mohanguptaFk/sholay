@@ -7,7 +7,7 @@ import java.util.*;
  * mapping example. Entertainment-->Movies, plays etc.
  */
 public class SuperTags {
-    public  enum SuperTagsTypes {CHILL, ADVENTURE, FAMILY, COUPLES, SINGLE, FRIENDS, OUTDOOR, INDOOR};
+    public  enum SuperTagsTypes {CHILL, ADVENTURE, FAMILY, COUPLES, SINGLE, FRIENDS, OUTDOOR, INDOOR, PRIMARY, SECONDARY, TERTIARY};
 
     private static SuperTags instance = new SuperTags();
 

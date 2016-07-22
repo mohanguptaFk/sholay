@@ -1,5 +1,6 @@
 package com.sholay.app.Serving;
 
+import com.sholay.app.engine.Controller;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
@@ -11,6 +12,7 @@ public class ServerStarter {
     public static void main(final String[] args) throws Exception {
 
 
+        Controller.init();
         Server server = new Server(9090);
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.setContextPath("/thakur");

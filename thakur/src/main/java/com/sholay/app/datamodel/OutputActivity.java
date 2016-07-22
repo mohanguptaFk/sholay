@@ -24,7 +24,19 @@ public class OutputActivity {
     public String imageUrl; //actual web url.
 
     @JsonProperty
-    public long distanceInMeters;
+    public long distanceInMeters; //first activity has distance from source, others distance from previous.
+
+    @JsonProperty
+    public String description;
 
     public OutputActivity(){}
+
+    public OutputActivity(Activity activity) {
+        if (activity != null) {
+            id = activity.id;
+            title = activity.title;
+            imageUrl = activity.imageUrl;
+            description = activity.getDescription();
+        }
+    }
 }
