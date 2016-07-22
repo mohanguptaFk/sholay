@@ -202,7 +202,7 @@ public class Recommender {
 
     public static class ActivityCompare implements Comparator<ScoredActivity> {
 
-        @Override
+
         public int compare(ScoredActivity o1, ScoredActivity o2) {
             // write comparison logic here like below , it's just a sample
             return (int) (o2.score - o1.score); //reverse sorted.

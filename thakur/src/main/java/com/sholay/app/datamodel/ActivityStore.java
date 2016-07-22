@@ -1,7 +1,8 @@
 package com.sholay.app.datamodel;
 
 
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -28,7 +29,26 @@ public class ActivityStore {
     }
 
     public void addActivity(Activity activity) {
-        this.allActivities.add(activity);
+//        if (activity.equals(ActivityTypes.EATING)) {
+////            newAc = activity.setStartTime();
+//            tagToActivityMap.put("lunch", )
+
+//        }
+    { this.allActivities.add(activity);}
+    }
+
+
+    private long dateInMilis() throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+        String dateInString = "22-01-2015 10:20:56";
+        Date date = sdf.parse(dateInString);
+
+        System.out.println(dateInString);
+        System.out.println("Date - Time in milliseconds : " + date.getTime());
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar.getTimeInMillis();
     }
 
     //create the reverse loopup index
@@ -44,10 +64,14 @@ public class ActivityStore {
 
     private void addActivityToTag(String tag, Activity activity) {
         if (!tagToActivityMap.containsKey(tag)) {
-            tagToActivityMap.put(tag, new HashSet<Activity>());
+            tagToActivityMap.put(tag.toLowerCase(), new HashSet<Activity>());
         }
 
-        tagToActivityMap.get(tag).add(activity);
+        tagToActivityMap.get(tag.toLowerCase()).add(activity);
+    }
+
+    public Set<Activity> getActivity(String tag) {
+        return tagToActivityMap.get(tag.toLowerCase());
     }
 
     //ex (play OR food) AND (outdoor)
